@@ -98,7 +98,9 @@ extension SearchViewController: UISearchResultsUpdating,UISearchControllerDelega
                 self.photosViewModel.getPhotosBySearch( searchText: "dogs")
                 self.handleApiErrorResponse()
                 self.handleApiSuccessResponse()
-                collectionViewPhotos.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                if photosViewModel.numberOfRows() > 0 {
+                    collectionViewPhotos.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                }
             }
         }
     }
