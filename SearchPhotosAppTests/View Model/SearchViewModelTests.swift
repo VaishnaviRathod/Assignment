@@ -1,0 +1,52 @@
+//
+//  SearchPhotosAppTests.swift
+//  SearchPhotosAppTests
+//
+//  Created by Vaishnavi Rathod on 01/11/22.
+//
+
+import XCTest
+@testable import SearchPhotosApp
+
+class SearchViewModelTests: XCTestCase {
+    
+    var searchViewModel : SearchViewModel!
+    var mockServices : MockWebServices?
+    
+    override func setUp() {
+        searchViewModel = SearchViewModel(apiManager: APIManager())
+        mockServices = MockWebServices()
+    }
+    
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    func testExample() throws {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Any test you write for XCTest can be annotated as throws and async.
+        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
+        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    }
+
+    func testPerformanceExample() throws {
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
+        }
+    }
+    
+    func test_PhotoMockData_With_Valid_Returns_PhotoResponse() {
+    
+        mockServices?.getPhotosBySearch(responseType: .valid, completion: { result in
+            XCTAssertNotNil(result)
+            XCTAssertEqual(result?.status, 200)
+        })
+    }
+
+}
