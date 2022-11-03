@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class FullScreenImageViewController:UIViewController {
     
@@ -42,8 +43,20 @@ class FullScreenImageViewController:UIViewController {
     
     
     @objc private func didTapImageView(_ sender: UITapGestureRecognizer) {
-        print("did tap image view", sender)
-        imageScrollView.setZoomScale(1.0, animated: true)
+        let scale = min(imageScrollView.minimumZoomScale * 2, imageScrollView.maximumZoomScale)
+        if scale != imageScrollView.zoomScale {
+            let point = sender.location(in: zoomableImageView)
+            
+            let scrollSize = imageScrollView.frame.size
+            let size = CGSize(width: scrollSize.width / scale,
+                              height: scrollSize.height / scale)
+            let origin = CGPoint(x: point.x - size.width / 2,
+                                 y: point.y - size.height / 2)
+            imageScrollView.zoom(to:CGRect(origin: origin, size: size), animated: true)
+            print(CGRect(origin: origin, size: size))
+        } else {
+            imageScrollView.setZoomScale(1.0, animated: true)
+        }
     }
 }
 //MARK:- UIScrollViewDelegate
