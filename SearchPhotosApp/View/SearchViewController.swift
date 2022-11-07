@@ -30,10 +30,7 @@ class SearchViewController: UIViewController {
         searchController.searchBar.compatibleSearchTextField.backgroundColor = .white
         searchController.searchBar.tintColor = .white
         
-        
     }
-    
-   
     
     func setupSearchController() {
         searchController.searchResultsUpdater = self
@@ -42,7 +39,7 @@ class SearchViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-    /// Handling Error
+    
     func handleApiErrorResponse() {
         photosViewModel.bindAPIErrorResponse = { [weak self] in
             DispatchQueue.main.async {
@@ -63,7 +60,6 @@ class SearchViewController: UIViewController {
     }
     
     func handleEmptyData() {
-        
         if photosViewModel.response?.searchedData?.isEmpty == true  {
             self.collectionViewPhotos.backgroundView = self.viewNoRecord
         }
@@ -95,9 +91,7 @@ extension SearchViewController: UISearchResultsUpdating,UISearchControllerDelega
             if searchText.isEmpty == false {
                 fetchPhotos(searchText)
             } else {
-                self.photosViewModel.getPhotosBySearch( searchText: "dogs")
-                self.handleApiErrorResponse()
-                self.handleApiSuccessResponse()
+                self.photosViewModel.getPhotosBySearch(searchText: "dogs")
                 if photosViewModel.numberOfRows() > 0 {
                     collectionViewPhotos.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 }
@@ -108,13 +102,10 @@ extension SearchViewController: UISearchResultsUpdating,UISearchControllerDelega
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
             searchBar.text = nil
             searchBar.showsCancelButton = false
-
             searchBar.endEditing(true)
 
-            self.photosViewModel.getPhotosBySearch( searchText: "dogs")
-            self.handleApiErrorResponse()
-            self.handleApiSuccessResponse()
-            
+            self.photosViewModel.getPhotosBySearch(searchText: "dogs")
+        
         }
 }
 

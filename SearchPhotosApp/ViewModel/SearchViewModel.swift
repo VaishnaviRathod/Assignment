@@ -51,7 +51,7 @@ class SearchViewModel:PhotosViewModelProtocol {
         
         guard let url = URL(string: "https://api.imgur.com/3/gallery/search/?q=\(text)") else { return print("") }
         
-        self.apiManager?.getApiData(requestUrl: url, completionHandler: { (response: NetworkResponse<SearchResponse, NetworkError>) in
+        self.apiManager?.getApiData(requestUrl: url, httpMethod: "GET", completionHandler: { (response: NetworkResponse<SearchResponse, NetworkError>) in
             switch response{
             case .success(let result):
                 self.response = result

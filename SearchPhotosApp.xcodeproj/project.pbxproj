@@ -140,7 +140,6 @@
 				8EC16958996738B63681E4D9 /* Pods-SearchPhotosAppTests.debug.xcconfig */,
 				DEBB78F778F384826F983847 /* Pods-SearchPhotosAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
